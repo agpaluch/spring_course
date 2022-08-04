@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="task_groups")
-class TaskGroup {
+public class TaskGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
