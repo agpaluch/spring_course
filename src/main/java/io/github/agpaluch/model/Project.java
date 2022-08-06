@@ -18,4 +18,27 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL, mappedBy="project")
     private Set<ProjectStep> projectSteps;
 
+    String getDescription() {
+        return description;
+    }
+
+    void setDescription(final String description) {
+        this.description = description;
+    }
+
+    Set<TaskGroup> getTaskGroups() {
+        return taskGroups;
+    }
+
+    void setTaskGroups(final Set<TaskGroup> taskGroups) {
+        this.taskGroups = taskGroups;
+    }
+
+    public Set<ProjectStep> getProjectSteps() {
+        return projectSteps;
+    }
+
+    void setProjectSteps(final Set<ProjectStep> projectSteps) {
+        this.projectSteps = projectSteps;
+    }
 }
