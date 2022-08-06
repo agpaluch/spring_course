@@ -4,14 +4,22 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "project_steps")
-class ProjectStep {
+public class ProjectStep {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String description;
-    private long days_to_deadline;
+    private long daysToDeadline;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public long getDaysToDeadline() {
+        return daysToDeadline;
+    }
 }
