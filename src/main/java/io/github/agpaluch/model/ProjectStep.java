@@ -9,7 +9,7 @@ public class ProjectStep {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String description;
-    private long daysToDeadline;
+    private int daysToDeadline;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
@@ -19,7 +19,7 @@ public class ProjectStep {
         return description;
     }
 
-    public long getDaysToDeadline() {
+    public int getDaysToDeadline() {
         return daysToDeadline;
     }
 }

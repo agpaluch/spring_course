@@ -18,6 +18,17 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL, mappedBy="project")
     private Set<ProjectStep> projectSteps;
 
+    public Project() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    void setId(final int id) {
+        this.id = id;
+    }
+
     public String getDescription() {
         return description;
     }
