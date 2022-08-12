@@ -1,6 +1,7 @@
 package io.github.agpaluch.model.projection;
 
 import io.github.agpaluch.model.Task;
+import io.github.agpaluch.model.TaskGroup;
 
 import java.time.LocalDateTime;
 
@@ -24,8 +25,7 @@ public class GroupTaskWriteModel {
         this.deadline = deadline;
     }
 
-    public Task toTask(){
-        return new Task(description, deadline);
+    Task toTask(final TaskGroup group) {
+        return new Task(description, deadline, group);
     }
-
 }
