@@ -16,8 +16,9 @@ public class ProjectService {
 
     private ProjectRepository projectRepository;
     private TaskGroupRepository taskGroupRepository;
-    private TaskConfigurationProperties config;
     private TaskGroupService taskGroupService;
+    private TaskConfigurationProperties config;
+
 
     ProjectService(final ProjectRepository repository, final TaskGroupRepository taskGroupRepository, final TaskGroupService taskGroupService, final TaskConfigurationProperties config) {
         this.projectRepository = repository;

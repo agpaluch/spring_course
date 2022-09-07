@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
 
@@ -39,6 +40,24 @@ class TaskControllerE2ETest {
 
         //then
         assertThat(result).hasSize(initial+2);
+    }
+
+    @Test
+    void httpGet_returnsGivenTask() {
+        //given
+        Task savedTask = repo.save(new Task("foo", LocalDateTime.now()));
+
+        //when
+        ResponseEntity<Task> responseEntity =  restTemplate.getForEntity("http://localhost:"+port+"/tasks/"+savedTask.getId(), Task.class);
+        Task result = responseEntity.getBody();
+
+        //then
+        assertThat(result).hasFieldOrPropertyWithValue("deadline", savedTask.getDeadline())
+                .hasFieldOrPropertyWithValue("description", savedTask.getDescription())
+                .hasFieldOrPropertyWithValue("done", savedTask.isDone());
+
+        assertThat(responseEntity.getStatusCode().is2xxSuccessful()).isTrue();
+
     }
 
 }
