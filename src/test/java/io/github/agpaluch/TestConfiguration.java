@@ -13,6 +13,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 import java.lang.reflect.Field;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Configuration
@@ -60,6 +62,11 @@ class TestConfiguration {
             }
 
             @Override
+            public boolean existsByDoneIsFalseAndDeadlineNullOrDoneIsFalseAndDeadlineIsLessThanEqual(final LocalDateTime today) {
+                return false;
+            }
+
+            @Override
             public Task save(final Task entity) {
 
                 int key = tasks.size() + 1;
@@ -79,6 +86,16 @@ class TestConfiguration {
             @Override
             public List<Task> findByDone(final boolean done) {
                 return null;
+            }
+
+            @Override
+            public List<Task> findAllByGroup_Id(final Integer groupId) {
+                return List.of();
+            }
+
+            @Override
+            public List<Task> findAllByDoneIsFalseAndDeadlineNullOrDoneIsFalseAndDeadlineIsLessThanEqual(final LocalDateTime today) {
+                return List.of();
             }
         };
     }
