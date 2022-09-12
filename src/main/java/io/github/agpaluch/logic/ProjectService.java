@@ -5,6 +5,7 @@ import io.github.agpaluch.model.*;
 import io.github.agpaluch.model.projection.GroupReadModel;
 import io.github.agpaluch.model.projection.GroupTaskWriteModel;
 import io.github.agpaluch.model.projection.GroupWriteModel;
+import io.github.agpaluch.model.projection.ProjectWriteModel;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -31,8 +32,8 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
-    public Project save(Project toSave){
-        return projectRepository.save(toSave);
+    public Project save(ProjectWriteModel toSave){
+        return projectRepository.save(toSave.toProject());
     }
 
     public GroupReadModel createGroup(LocalDateTime deadline, int projectId){
@@ -45,7 +46,7 @@ public class ProjectService {
             project ->{
                 var targetGroup = new GroupWriteModel();
                 targetGroup.setDescription(project.getDescription());
-                targetGroup.setTasks(project.getProjectSteps().stream()
+                targetGroup.setTasks(project.getSteps().stream()
                         .map(step -> {
                             LocalDateTime taskDeadline = deadline.plusDays(step.getDaysToDeadline());
                             var task = new GroupTaskWriteModel();
@@ -53,7 +54,7 @@ public class ProjectService {
                             task.setDeadline(taskDeadline);
                             return task;
                         }).collect(Collectors.toSet()));
-                return taskGroupService.createGroup(targetGroup);
+                return taskGroupService.createGroup(targetGroup, project);
             }
         ).orElseThrow(() -> new IllegalArgumentException("Project with given id not found."));
 

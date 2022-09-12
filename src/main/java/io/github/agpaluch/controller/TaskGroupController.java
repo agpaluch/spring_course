@@ -3,7 +3,6 @@ package io.github.agpaluch.controller;
 
 import io.github.agpaluch.logic.TaskGroupService;
 import io.github.agpaluch.model.Task;
-import io.github.agpaluch.model.TaskGroup;
 import io.github.agpaluch.model.TaskRepository;
 import io.github.agpaluch.model.projection.GroupReadModel;
 import io.github.agpaluch.model.projection.GroupWriteModel;

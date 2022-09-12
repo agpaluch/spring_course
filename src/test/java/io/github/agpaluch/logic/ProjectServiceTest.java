@@ -142,7 +142,7 @@ class ProjectServiceTest {
 
         var result = mock(Project.class);
         when(result.getDescription()).thenReturn(projectDescription);
-        when(result.getProjectSteps()).thenReturn(steps);
+        when(result.getSteps()).thenReturn(steps);
 
         return result;
     }
