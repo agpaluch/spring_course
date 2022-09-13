@@ -40,6 +40,10 @@ public class TaskGroupService {
                 .collect(Collectors.toList());
     }
 
+    public TaskGroup readById(int id){
+        return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("TaskGroup with given id not found"));
+    }
+
     public void toogleGroup(int groupId){
         if(taskRepository.existsByDoneIsFalseAndGroup_Id(groupId)){
             throw new IllegalStateException("Group has undone tasks. Do all the tasks first");
@@ -49,6 +53,7 @@ public class TaskGroupService {
         result.setDone(!result.isDone());
         repository.save(result);
     }
+
 
 
 }

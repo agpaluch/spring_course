@@ -53,7 +53,7 @@ public class ProjectService {
                             task.setDescription(step.getDescription());
                             task.setDeadline(taskDeadline);
                             return task;
-                        }).collect(Collectors.toSet()));
+                        }).collect(Collectors.toList()));
                 return taskGroupService.createGroup(targetGroup, project);
             }
         ).orElseThrow(() -> new IllegalArgumentException("Project with given id not found."));
