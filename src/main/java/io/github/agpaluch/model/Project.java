@@ -1,6 +1,7 @@
 package io.github.agpaluch.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Entity
@@ -9,6 +10,8 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @NotBlank(message = "Project's description must not be empty")
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="project")
@@ -16,7 +19,7 @@ public class Project {
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="project")
-    private Set<ProjectStep> projectSteps;
+    private Set<ProjectStep> steps;
 
     public Project() {
     }
@@ -33,7 +36,7 @@ public class Project {
         return description;
     }
 
-    void setDescription(final String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -45,11 +48,11 @@ public class Project {
         this.taskGroups = taskGroups;
     }
 
-    public Set<ProjectStep> getProjectSteps() {
-        return projectSteps;
+    public Set<ProjectStep> getSteps() {
+        return steps;
     }
 
-    void setProjectSteps(final Set<ProjectStep> projectSteps) {
-        this.projectSteps = projectSteps;
+    public void setSteps(final Set<ProjectStep> projectSteps) {
+        this.steps = projectSteps;
     }
 }

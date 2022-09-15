@@ -1,5 +1,6 @@
 package io.github.agpaluch.logic;
 
+import io.github.agpaluch.model.Project;
 import io.github.agpaluch.model.TaskGroup;
 import io.github.agpaluch.model.TaskGroupRepository;
 import io.github.agpaluch.model.TaskRepository;
@@ -24,7 +25,11 @@ public class TaskGroupService {
 
 
     public GroupReadModel createGroup(GroupWriteModel source){
-        TaskGroup result = repository.save(source.toGroup());
+        return createGroup(source, null);
+    }
+
+    GroupReadModel createGroup(GroupWriteModel source, final Project project){
+        TaskGroup result = repository.save(source.toGroup(project));
         return new GroupReadModel(result);
     }
 
@@ -33,6 +38,10 @@ public class TaskGroupService {
                 .stream()
                 .map(GroupReadModel::new)
                 .collect(Collectors.toList());
+    }
+
+    public TaskGroup readById(int id){
+        return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("TaskGroup with given id not found"));
     }
 
     public void toogleGroup(int groupId){
@@ -44,6 +53,7 @@ public class TaskGroupService {
         result.setDone(!result.isDone());
         repository.save(result);
     }
+
 
 
 }

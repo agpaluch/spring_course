@@ -2,7 +2,11 @@ package io.github.agpaluch.model.projection;
 
 import io.github.agpaluch.model.Task;
 
+import javax.validation.constraints.NotBlank;
+
 public class GroupTaskReadModel {
+
+    @NotBlank(message = "Task's description must not be empty")
     private String description;
     private boolean done;
 
