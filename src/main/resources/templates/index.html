@@ -1,18 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo App</title>
     <link rel="stylesheet" href="https://igoradamenko.github.io/awsm.css/css/awsm.min.css">
+    <style type="text/css">
+        .topcorner{
+            position:absolute;
+            top:0;
+            right:0;
+        }
+
+
+    </style>
+
 </head>
 <body>
 <header>
+<!--    <div class="topcorner">
+        <div sec:authorize="isAuthenticated()">
+            <div style="float: left; padding: 0.5em;" sec:authentication="principal.firstName"><a href="/logout"></a></div>
+            <div style="float: right; padding: 0.5em;"><a href="/logout">Wyloguj</a></div>
+        </div>
+    </div>-->
     <h1>Todo App</h1>
     <p>Doing all the things!</p>
     <nav>
         <ul>
-            <li>
+            <li sec:authorize="hasRole('ADMIN')">
                 <a href="/projects">Projekty</a>
             </li>
             <li>
